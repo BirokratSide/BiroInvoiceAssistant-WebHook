@@ -28530,11 +28530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/km/Projects/InvoiceAssistantWebhook/InvoiceAssistantWebhook/InvoiceAssistantWebhook.csproj",
+      "projectUniqueName": "/Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/InvoiceAssistantWebhook.csproj",
       "projectName": "InvoiceAssistantWebhook",
-      "projectPath": "/Users/km/Projects/InvoiceAssistantWebhook/InvoiceAssistantWebhook/InvoiceAssistantWebhook.csproj",
+      "projectPath": "/Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/InvoiceAssistantWebhook.csproj",
       "packagesPath": "/Users/km/.nuget/packages/",
-      "outputPath": "/Users/km/Projects/InvoiceAssistantWebhook/InvoiceAssistantWebhook/obj",
+      "outputPath": "/Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
