@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{20DEADDC-5B4A-4A1D-885F-DBDE8DBA0BB2}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="InvoiceAssistantWebhook/Controllers/InvoiceAssistantController.cs">
+    <Files>
+      <File FileName="InvoiceAssistantWebhook/Program.cs" Line="24" Column="29" />
+      <File FileName="InvoiceAssistantWebhook/Startup.cs" Line="84" Column="1" />
+      <File FileName="InvoiceAssistantWebhook/EndpointConfiguration.cs" Line="12" Column="45" />
+      <File FileName="InvoiceAssistantWebhook/KestrelServerOptionsExtensions.cs" Line="55" Column="58" />
+      <File FileName="InvoiceAssistantWebhook/appsettings.json" Line="12" Column="8" />
+      <File FileName="InvoiceAssistantWebhook/appsettings.Development.json" Line="24" Column="4" />
+      <File FileName="InvoiceAssistantWebhook/Properties/launchSettings.json" Line="22" Column="46" />
+      <File FileName="InvoiceAssistantWebhook/Controllers/ValuesController.cs" Line="17" Column="10" />
+      <File FileName="InvoiceAssistantWebhook/Controllers/InvoiceAssistantController.cs" Line="22" Column="9" />
+      <File FileName="InvoiceAssistantWebhook/Controllers/MBillsController.cs" Line="30" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/km/Projects/InvoiceAssistantWebhook/InvoiceAssistantWebhook/Controllers/MBillsController.cs" relfile="InvoiceAssistantWebhook/Controllers/MBillsController.cs" line="32" column="38" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.InvoiceAssistantWebhook PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
