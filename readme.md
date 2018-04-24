@@ -7,11 +7,8 @@ The endpoint needs to ensure a HTTPS connection.
 
 ### TODOS
 
-- Need to enable HTTPS in the .NET application
-
-https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/
-
-- Need to expose a POST method, to which the InvoiceAssistant API can connect.
+- Need to establish a secure TLS tunnel by getting a verified certificate.
+	- https://ngrok.com/docs#bind-tls
 
 ### Using
 
