@@ -16,6 +16,8 @@ The endpoint needs to ensure a HTTPS connection.
 
 - [pseudocode](https://www.dropbox.com/s/6xndazthl3p86pk/IMG_0102.JPG?dl=0)
 
+These todos are in chronological order:
+
 - Bricelj dogovor:
 	- We will put the dll just as a class inside the project
 	- **OnInsertSlika**
