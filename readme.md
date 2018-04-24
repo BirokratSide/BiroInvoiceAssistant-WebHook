@@ -4,6 +4,12 @@ BiroInvoiceAssistant web hook is the endpoint to which processed invoices from t
 
 The endpoint needs to ensure a HTTPS connection.
 
+### Architecture
+
+- [First idea](https://www.dropbox.com/s/ceyof25al2lrv1i/IMG_0100.JPG?dl=0) (will not use)
+
+- [Second idea](https://www.dropbox.com/s/k0dlpxoar7u7kex/IMG_0101.JPG?dl=0) (will use)
+
 
 ### TODOS
 
@@ -18,7 +24,7 @@ https://localhost:44340/api/[controller]
 ```
 
 - Run the server in Visual Studio
-- ```ngrok tls 44340```
+- ```ngrok tls 44340```
 - The webhook is now exposed on ngrok's addres (e.g. ```https://iej834j28.ngrok.io/api/invoiceassistant```)
 
 

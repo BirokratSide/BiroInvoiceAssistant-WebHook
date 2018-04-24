@@ -20,7 +20,7 @@ namespace InvoiceAssistantWebhook
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                    .UseStartup<Startup>()
-                   .UseKestrel(options => options.ConfigureEndpoints())
+                   .UseKestrel(options => options.ConfigureEndpoints()) //TURN ON FOR HTTPS
                    .Build();
     }
 }
