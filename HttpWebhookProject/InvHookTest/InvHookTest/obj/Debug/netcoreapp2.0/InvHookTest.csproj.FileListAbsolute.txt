@@ -1,0 +1,11 @@
+/Users/km/Projects/InvHookTest/InvHookTest/bin/Debug/netcoreapp2.0/InvHookTest.deps.json
+/Users/km/Projects/InvHookTest/InvHookTest/bin/Debug/netcoreapp2.0/InvHookTest.runtimeconfig.json
+/Users/km/Projects/InvHookTest/InvHookTest/bin/Debug/netcoreapp2.0/InvHookTest.runtimeconfig.dev.json
+/Users/km/Projects/InvHookTest/InvHookTest/bin/Debug/netcoreapp2.0/InvHookTest.dll
+/Users/km/Projects/InvHookTest/InvHookTest/bin/Debug/netcoreapp2.0/InvHookTest.pdb
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.csprojResolveAssemblyReference.cache
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.csproj.CoreCompileInputs.cache
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.AssemblyInfoInputs.cache
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.AssemblyInfo.cs
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.dll
+/Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.pdb

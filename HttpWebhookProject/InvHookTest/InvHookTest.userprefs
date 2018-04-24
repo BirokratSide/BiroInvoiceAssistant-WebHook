@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{FCA41A4C-627D-4004-9CAF-F9681B63E152}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="InvHookTest/Controllers/ValuesController.cs">
+    <Files>
+      <File FileName="InvHookTest/Program.cs" Line="21" Column="35" />
+      <File FileName="InvHookTest/Controllers/ValuesController.cs" Line="37" Column="57" />
+      <File FileName="InvHookTest/appsettings.json" Line="1" Column="1" />
+      <File FileName="InvHookTest/appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="InvHookTest/Startup.cs" Line="1" Column="1" />
+      <File FileName="InvHookTest/Properties/launchSettings.json" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.InvHookTest PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
