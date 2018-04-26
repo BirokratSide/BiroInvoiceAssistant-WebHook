@@ -9,3 +9,14 @@
 /Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.AssemblyInfo.cs
 /Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.dll
 /Users/km/Projects/InvHookTest/InvHookTest/obj/Debug/netcoreapp2.0/InvHookTest.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\InvHookTest.deps.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\InvHookTest.runtimeconfig.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\InvHookTest.runtimeconfig.dev.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\InvHookTest.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\InvHookTest.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.csprojResolveAssemblyReference.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.csproj.CoreCompileInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.AssemblyInfoInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.AssemblyInfo.cs
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.pdb
