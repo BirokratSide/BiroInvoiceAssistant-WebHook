@@ -23,7 +23,7 @@ The procudure bellow is implemented.
 
 **Procedure**
 
-- Make sure $domain is set up correctly so that the above url is linking to $production
-- $production IIS should have a URL Rewrite -> Reverse Proxy rule to forward ```birowebhook.andersen.si``` to $endpoint.
-- $endpoint IIS should have a URL Rewrite -> Reverse Proxy rule to forward port 80 to localhost:5000
-- Run the birowebhook application in either debug mode or release mode on $endpoint. By default it will start on port 5000.
+- Make sure **$domain** is set up correctly so that the above url is linking to $production
+- **$production** IIS should have a URL Rewrite -> Reverse Proxy rule to forward ```birowebhook.andersen.si``` to **$endpoint**.
+- **$endpoint** IIS should have a URL Rewrite -> Reverse Proxy rule to forward port 80 to localhost:5000
+- Run the **HttpWebhookProject/InvHookTest** in either debug mode or release mode on **$endpoint**. By default it will start on port 5000.
