@@ -1,4 +1,20 @@
-# Production service
+## Development
+
+##### HTTPS service
+
+the default path for the API is set up at 
+```
+https://localhost:44340/api/[controller]
+```
+
+- Run the server in Visual Studio
+- ```ngrok tls 44340```
+- The webhook is now exposed on ngrok's addres (e.g. ```https://iej834j28.ngrok.io/api/invoiceassistant```)
+
+**Will not work because we don't have an authority issued SSL certificate when exposed to the internet. Will work locally though.**
+
+
+## Production
 
 ### Plan
 

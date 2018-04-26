@@ -4,8 +4,9 @@ BiroInvoiceAssistant web hook is the endpoint to which processed invoices from t
 
 ##### Check out some resources for this project
 
-- [plans](./resources/plans.md) - TODOS and the big picture.
-- [production](./resources/production.md) - How the production server is currently set up and how to set it up.
+- [big picture plans](./resources/plans.md) - the big picture and the TODOS for it.
+- [todos](./resources/planshook.md) - The todos and plans concerning only the webhook project.
+- [environments](./resources/production.md) - How the tools is set up in different environments.
 - [configuring for HTTPS](./resources/httpsconfig.md) - Currently the service is running over http, but eventually, it will have to run over https.
 
 ##### Useful theory regarding this project
