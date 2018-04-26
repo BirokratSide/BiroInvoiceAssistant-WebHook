@@ -15,9 +15,13 @@ The procudure bellow is implemented.
 
 ##### How to set it up
 
-$domain = Ask Bricelj
-$production = hidden
-$endpoint = vmKristijan (will later be a production server)
+**Configuration**
+
+- $domain = Ask Bricelj
+- $production = hidden
+- $endpoint = vmKristijan (will later be a production server)
+
+**Procedure**
 
 - Make sure $domain is set up correctly so that the above url is linking to $production
 - $production IIS should have a URL Rewrite -> Reverse Proxy rule to forward ```birowebhook.andersen.si``` to $endpoint.
