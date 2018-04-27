@@ -9,6 +9,9 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 using BiroInvoiceAssistant;
 
 namespace InvHookTest.Controllers
@@ -18,8 +21,19 @@ namespace InvHookTest.Controllers
     public class InvoiceAssistantController : Controller
     {
 
-        #region [Methods]
+        private IConfiguration Configuration { get; set; }
+        private InvoiceAssistantTestAPI InvoiceAssistantAPI;
 
+        #region [Constructor]
+        public InvoiceAssistantController(IConfiguration configuration) {
+            Configuration = configuration;
+            string ApiEndpoint = Configuration.GetValue<string>("InvoiceAssistantAPI:ENDPOINT");
+            string ApiKey = Configuration.GetValue<string>("InvoiceAssistantAPI:APIKEY");
+            InvoiceAssistantAPI = new InvoiceAssistantTestAPI(ApiEndpoint, ApiKey);
+        }
+        #endregion
+
+        #region [Methods]
         [HttpPost]
         public async void Post() // needs to be this way because algoritmik sends text/plain encoded by UTF8
         {
