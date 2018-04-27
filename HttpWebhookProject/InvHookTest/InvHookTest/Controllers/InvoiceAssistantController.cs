@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using BiroInvoiceAssistant;
+using InvHookTest.Structs;
 
 namespace InvHookTest.Controllers
 {
@@ -23,13 +24,17 @@ namespace InvHookTest.Controllers
 
         private IConfiguration Configuration { get; set; }
         private InvoiceAssistantTestAPI InvoiceAssistantAPI;
+        private BazureInvoiceBufferAPI BazureBufferAPI;
 
         #region [Constructor]
         public InvoiceAssistantController(IConfiguration configuration) {
             Configuration = configuration;
+
             string ApiEndpoint = Configuration.GetValue<string>("InvoiceAssistantAPI:ENDPOINT");
             string ApiKey = Configuration.GetValue<string>("InvoiceAssistantAPI:APIKEY");
             InvoiceAssistantAPI = new InvoiceAssistantTestAPI(ApiEndpoint, ApiKey);
+
+            BazureBufferAPI = new BazureInvoiceBufferAPI(configuration); // how to do this more elegantly, by using dependency injection?
         }
         #endregion
 
@@ -50,7 +55,7 @@ namespace InvHookTest.Controllers
             }
             else
             {
-                RetrieveInvoice(content);
+                StoreInvoiceInBazureBuffer(content);
             }
         }
         #endregion
@@ -64,13 +69,23 @@ namespace InvHookTest.Controllers
             HttpResponseMessage msg = client.GetAsync(SubscribeURL).GetAwaiter().GetResult();
         }
 
-        private static void RetrieveInvoice(string content)
+        private void StoreInvoiceInBazureBuffer(string content)
         {
             dynamic RequestObject = JsonConvert.DeserializeObject(content);
-            InvoiceAssistantTestAPI api = new BiroInvoiceAssistant.InvoiceAssistantTestAPI("endpoint", "apikey");
-            api.PollForInvoice("pollkey", false, true);
+            InvoiceAssistantAPI.PollForInvoice(RequestObject.PollKey, false, true); // still need to debug
 
             // store the record to the database
+            SInvoiceRecord rec = new SInvoiceRecord();
+            // here you need to parse the filename of the rihard return to get the
+            // companyid, companyyearid and oznaka, additional params if necessary.
+
+            /*
+             TODOS: IMPOSE A STRICT RULE ON THE INVOICE ASSISTANT API WHEN IT QUERIES FOR THE INVOICE RACUN, THAT IT HAS
+                    TO ENFORCE THE FILENAME TO CONTAIN CompanyId, CompanyYearId, Oznaka, AdditionalParams.
+             
+             */
+
+            BazureBufferAPI.SaveRecord(rec);
         }
         #endregion
     }

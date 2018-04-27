@@ -29,8 +29,13 @@ namespace InvHookTest
         #endregion
 
         #region [public]
-        public bool CreateDatabaseIfNotExists(string db_name) {
-            string query = CreateDatabaseIfNotExistsSql(db_name);
+        public void Start() {
+            CreateDatabaseIfNotExists();
+            CreateTableIfNotExists();
+        }
+
+        public bool CreateDatabaseIfNotExists() {
+            string query = CreateDatabaseIfNotExistsSql(InitialCatalog);
             IDbCommand cmd = SqlConnection.GenerateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = query;
@@ -38,9 +43,9 @@ namespace InvHookTest
             return success > 0; // are you sure?
         }
 
-        public int CreateTableIfNotExists(string db_name)
+        public int CreateTableIfNotExists()
         {
-            string query = CreateTableIfNotExistsSql(db_name);
+            string query = CreateTableIfNotExistsSql(InitialCatalog);
             IDbCommand cmd = SqlConnection.GenerateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = query;
