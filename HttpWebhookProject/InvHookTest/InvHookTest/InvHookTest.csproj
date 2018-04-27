@@ -17,4 +17,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="BiroInvoiceAssistantAPI">
+      <HintPath>..\..\..\external_deps\BiroInvoiceAssistantAPI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

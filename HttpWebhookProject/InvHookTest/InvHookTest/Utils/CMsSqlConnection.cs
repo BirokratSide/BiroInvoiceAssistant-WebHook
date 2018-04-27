@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 
-namespace InvHookTest.utils
+namespace InvHookTest.Utils
 {
     public class CMsSqlConnection
     {
