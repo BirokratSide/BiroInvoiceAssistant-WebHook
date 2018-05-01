@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 
+using BiroInvoiceAssistant.structs;
+
 using InvHookTest.Utils;
-using InvHookTest.Structs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -62,12 +63,10 @@ namespace InvHookTest
             valuenames += "[company_id], ";
             valuenames += "[company_year_id], ";
             valuenames += "[oznaka], ";
-            valuenames += "[invoice_assistant_filename], ";
             valuenames += "[invoice_assistant_content], ";
             valuevalues += GConv.StrToDb(record.CompanyId) + ", ";
             valuevalues += GConv.StrToDb(record.CompanyYearId) + ", ";
             valuevalues += GConv.StrToDb(record.Oznaka) + ", ";
-            valuevalues += GConv.StrToDb(record.InvoiceAssistantFilename) + ", ";
             valuevalues += GConv.StrToDb(record.InvoiceAssistantContent) + ", ";
 
             string query = SaveRecordSql(valuenames, valuevalues);
@@ -104,7 +103,6 @@ namespace InvHookTest
                         "company_year_id varchar(15) not null, " +
                         "oznaka varchar(20) not null, " +
                         "additional_params varchar(100), " +
-                        "invoice_assistant_filename varchar(80) not null, " +
                         "invoice_assistant_content varchar(MAX) not null " +
                     ") " +
                 "END", INVOICE_BUFFER_TABLE_NAME);

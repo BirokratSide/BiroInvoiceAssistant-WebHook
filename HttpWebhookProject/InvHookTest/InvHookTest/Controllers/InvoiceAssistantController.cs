@@ -8,12 +8,12 @@ using System.Net.Http;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using BiroInvoiceAssistant;
-using InvHookTest.Structs;
+using BiroInvoiceAssistant.structs;
+using BiroInvoiceAssistant.helpers;
 
 namespace InvHookTest.Controllers
 {
@@ -42,6 +42,8 @@ namespace InvHookTest.Controllers
         [HttpPost]
         public async void Post() // needs to be this way because algoritmik sends text/plain encoded by UTF8
         {
+            Console.WriteLine("Incoming request");
+
             string content = "";
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
@@ -51,7 +53,8 @@ namespace InvHookTest.Controllers
             string msgType = Request.Headers["x-amz-sns-message-type"];
             if (msgType != null && msgType == "SubscriptionConfirmation")
             {
-                VerifySubscription(content);
+                string returnMessage = VerifySubscription(content);
+                Console.WriteLine("Registration finished: {0}", returnMessage);
             }
             else
             {
@@ -61,31 +64,24 @@ namespace InvHookTest.Controllers
         #endregion
 
         #region [Auxiliary]
-        private static void VerifySubscription(string content)
+        private static string VerifySubscription(string content)
         {
             dynamic RequestObject = JsonConvert.DeserializeObject(content);
             string SubscribeURL = RequestObject.SubscribeURL;
             HttpClient client = new HttpClient();
             HttpResponseMessage msg = client.GetAsync(SubscribeURL).GetAwaiter().GetResult();
+            return msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
         }
 
         private void StoreInvoiceInBazureBuffer(string content)
         {
-            dynamic RequestObject = JsonConvert.DeserializeObject(content);
-            InvoiceAssistantAPI.PollForInvoice(RequestObject.PollKey, false, true); // still need to debug
+            dynamic requestObject = JsonConvert.DeserializeObject(content);
+            SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(requestObject.PollKey, false, true);
 
             // store the record to the database
-            SInvoiceRecord rec = new SInvoiceRecord();
-            // here you need to parse the filename of the rihard return to get the
-            // companyid, companyyearid and oznaka, additional params if necessary.
+            SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
 
-            /*
-             TODOS: IMPOSE A STRICT RULE ON THE INVOICE ASSISTANT API WHEN IT QUERIES FOR THE INVOICE RACUN, THAT IT HAS
-                    TO ENFORCE THE FILENAME TO CONTAIN CompanyId, CompanyYearId, Oznaka, AdditionalParams.
-             
-             */
-
-            BazureBufferAPI.SaveRecord(rec);
+            // BazureBufferAPI.SaveRecord(rec);
         }
         #endregion
     }
