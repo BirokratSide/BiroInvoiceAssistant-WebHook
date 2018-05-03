@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
@@ -76,12 +77,62 @@ namespace InvHookTest.Controllers
         private void StoreInvoiceInBazureBuffer(string content)
         {
             dynamic requestObject = JsonConvert.DeserializeObject(content);
-            SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(requestObject.PollKey, false, true);
+            dynamic innerObject = null;
 
-            // store the record to the database
-            SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
+            try
+            {
+                innerObject = JsonConvert.DeserializeObject(requestObject.Message);
+            }
+            catch (Exception ex) { }
+            try
+            {
+                innerObject = JsonConvert.DeserializeObject(requestObject.Message.Value);
+            }
+            catch (Exception ex) { }
+            try
+            {
+                innerObject = JsonConvert.DeserializeObject(requestObject.Message.Value.Value);
+            }
+            catch (Exception ex) { }
 
-            // BazureBufferAPI.SaveRecord(rec);
+
+
+            if (innerObject.status != "DONE")
+            {
+                // log that something has gone wrong and log the
+                // innerObject state as well.
+                return;
+            }
+            string inv_key = "";
+            try
+            {
+                inv_key = innerObject.inv_key;
+            }
+            catch (Exception ex) { }
+            try
+            {
+                inv_key = innerObject.inv_key.Value;
+            }
+            catch (Exception ex) { }
+
+            if (inv_key == "") return;
+            for (int i = 0; i < 10; i++)
+            {
+                Thread.Sleep(3000);
+                try
+                {
+                    SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(inv_key, false, true).GetAwaiter().GetResult();
+
+                    // store the record to the database
+                    SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
+                    rec.InvoiceAssistantContent = JsonConvert.SerializeObject(rec);
+
+                    BazureBufferAPI.SaveRecord(rec);
+                }
+                catch (Exception ex) {
+
+                }
+            }
         }
         #endregion
     }

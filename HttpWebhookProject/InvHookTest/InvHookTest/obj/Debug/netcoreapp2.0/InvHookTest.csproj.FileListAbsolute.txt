@@ -22,3 +22,4 @@ C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookPr
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.pdb
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\BiroInvoiceAssistantAPI.dll
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\obj\Debug\netcoreapp2.0\InvHookTest.csproj.CopyComplete
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\HttpWebhookProject\InvHookTest\InvHookTest\bin\Debug\netcoreapp2.0\BiroInvoiceAssistantAPI.pdb

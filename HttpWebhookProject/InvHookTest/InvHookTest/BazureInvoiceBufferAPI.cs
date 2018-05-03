@@ -16,16 +16,19 @@ namespace InvHookTest
     {
 
         CMsSqlConnection SqlConnection;
-        string InitialCatalog;
+        string TargetDatabase;
 
         #region [constructor]
         public BazureInvoiceBufferAPI(IConfiguration config) {
             string username = config.GetValue<string>("DatabaseConnection:Username");
             string password = config.GetValue<string>("DatabaseConnection:Password");
             string database = config.GetValue<string>("DatabaseConnection:ServerAddress");
-            InitialCatalog = config.GetValue<string>("DatabaseConnection:InitialCatalog");
+            string initial_catalog = config.GetValue<string>("DatabaseConnection:InitialCatalog");
             bool integrated_security = config.GetValue<bool>("DatabaseConnection:IntegratedSecurity");
-            SqlConnection = new CMsSqlConnection(GSqlUtils.GetConnectionString(database, username, password, InitialCatalog));
+            SqlConnection = new CMsSqlConnection(GSqlUtils.GetConnectionString(database, username, password, "", integrated_security));
+
+            TargetDatabase = config.GetValue<string>("DatabaseConnection:TargetDatabase");
+            Start();
         }
         #endregion
 
@@ -36,7 +39,7 @@ namespace InvHookTest
         }
 
         public bool CreateDatabaseIfNotExists() {
-            string query = CreateDatabaseIfNotExistsSql(InitialCatalog);
+            string query = CreateDatabaseIfNotExistsSql(TargetDatabase);
             IDbCommand cmd = SqlConnection.GenerateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = query;
@@ -46,7 +49,7 @@ namespace InvHookTest
 
         public int CreateTableIfNotExists()
         {
-            string query = CreateTableIfNotExistsSql(InitialCatalog);
+            string query = CreateTableIfNotExistsSql(TargetDatabase);
             IDbCommand cmd = SqlConnection.GenerateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = query;
@@ -63,11 +66,11 @@ namespace InvHookTest
             valuenames += "[company_id], ";
             valuenames += "[company_year_id], ";
             valuenames += "[oznaka], ";
-            valuenames += "[invoice_assistant_content], ";
+            valuenames += "[invoice_assistant_content])";
             valuevalues += GConv.StrToDb(record.CompanyId) + ", ";
             valuevalues += GConv.StrToDb(record.CompanyYearId) + ", ";
             valuevalues += GConv.StrToDb(record.Oznaka) + ", ";
-            valuevalues += GConv.StrToDb(record.InvoiceAssistantContent) + ", ";
+            valuevalues += GConv.StrToDb(record.InvoiceAssistantContent) + ")";
 
             string query = SaveRecordSql(valuenames, valuevalues);
 
@@ -115,10 +118,10 @@ namespace InvHookTest
                     
                     use [{0}]
                     INSERT INTO [dbo].[{1}]
-                    ({2}} VALUES ({3});
+                    {2} VALUES {3};
                     SELECT Scope_Identity();
 
-                ", InitialCatalog, INVOICE_BUFFER_TABLE_NAME, valuenames, valuevalues);
+                ", TargetDatabase, INVOICE_BUFFER_TABLE_NAME, valuenames, valuevalues);
         }
         #endregion
 
