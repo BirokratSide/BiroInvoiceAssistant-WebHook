@@ -66,10 +66,12 @@ namespace InvHookTest
             valuenames += "[company_id], ";
             valuenames += "[company_year_id], ";
             valuenames += "[oznaka], ";
+            valuenames += "[vrsta], ";
             valuenames += "[invoice_assistant_content])";
             valuevalues += GConv.StrToDb(record.CompanyId) + ", ";
             valuevalues += GConv.StrToDb(record.CompanyYearId) + ", ";
             valuevalues += GConv.StrToDb(record.Oznaka) + ", ";
+            valuevalues += GConv.StrToDb(record.Tip) + ", "; // Tip je vbistvu vrsta slike
             valuevalues += GConv.StrToDb(record.InvoiceAssistantContent) + ")";
 
             string query = SaveRecordSql(valuenames, valuevalues);
@@ -105,6 +107,7 @@ namespace InvHookTest
                         "company_id varchar(15) not null, " +
                         "company_year_id varchar(15) not null, " +
                         "oznaka varchar(20) not null, " +
+                        "vrsta varchar(20) not null, " +
                         "additional_params varchar(100), " +
                         "invoice_assistant_content varchar(MAX) not null " +
                     ") " +

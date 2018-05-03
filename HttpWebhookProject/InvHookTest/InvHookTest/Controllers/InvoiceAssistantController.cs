@@ -95,7 +95,9 @@ namespace InvHookTest.Controllers
             }
             catch (Exception ex) { }
 
-
+            if (innerObject == null) {
+                throw new Exception("Unable to parse the inner object from the content object" + content);
+            }
 
             if (innerObject.status != "DONE")
             {
@@ -104,35 +106,34 @@ namespace InvHookTest.Controllers
                 return;
             }
             string inv_key = "";
+            Exception tmpException = null;
             try
             {
                 inv_key = innerObject.inv_key;
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                tmpException = ex;
+            }
             try
             {
                 inv_key = innerObject.inv_key.Value;
             }
-            catch (Exception ex) { }
-
-            if (inv_key == "") return;
-            for (int i = 0; i < 10; i++)
-            {
-                Thread.Sleep(3000);
-                try
-                {
-                    SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(inv_key, false, true).GetAwaiter().GetResult();
-
-                    // store the record to the database
-                    SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
-                    rec.InvoiceAssistantContent = JsonConvert.SerializeObject(rec);
-
-                    BazureBufferAPI.SaveRecord(rec);
-                }
-                catch (Exception ex) {
-
-                }
+            catch (Exception ex) {
+                tmpException = ex;
             }
+
+            if (inv_key == "")
+                throw tmpException;
+
+
+
+            SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(inv_key, false, true).GetAwaiter().GetResult();
+
+            // store the record to the database
+            SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
+            rec.InvoiceAssistantContent = JsonConvert.SerializeObject(rec);
+
+            BazureBufferAPI.SaveRecord(rec);
         }
         #endregion
     }
