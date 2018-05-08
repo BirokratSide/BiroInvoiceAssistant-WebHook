@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Structs\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -22,6 +21,9 @@
   <ItemGroup>
     <Reference Include="BiroInvoiceAssistantAPI">
       <HintPath>..\..\..\external_deps\BiroInvoiceAssistantAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharedUtilities">
+      <HintPath>..\..\..\external_deps\SharedUtilities.dll</HintPath>
     </Reference>
   </ItemGroup>
 

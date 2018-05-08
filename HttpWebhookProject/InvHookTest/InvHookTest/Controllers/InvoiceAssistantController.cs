@@ -16,6 +16,8 @@ using BiroInvoiceAssistant;
 using BiroInvoiceAssistant.structs;
 using BiroInvoiceAssistant.helpers;
 
+using SharedUtilities.utils;
+
 namespace InvHookTest.Controllers
 {
     [Produces("application/json")]
@@ -28,18 +30,18 @@ namespace InvHookTest.Controllers
         private BazureInvoiceBufferAPI BazureBufferAPI;
 
         #region [Constructor]
-        public InvoiceAssistantController(IConfiguration configuration) {
+        public InvoiceAssistantController(IConfiguration configuration)
+        {
             Configuration = configuration;
 
             string ApiEndpoint = Configuration.GetValue<string>("InvoiceAssistantAPI:ENDPOINT");
             string ApiKey = Configuration.GetValue<string>("InvoiceAssistantAPI:APIKEY");
             InvoiceAssistantAPI = new InvoiceAssistantTestAPI(ApiEndpoint, ApiKey);
-
-            BazureBufferAPI = new BazureInvoiceBufferAPI(configuration); // how to do this more elegantly, by using dependency injection?
+            BazureBufferAPI = GetBazureInvoiceAPI(configuration);
         }
         #endregion
 
-        #region [Methods]
+        #region [API]
         [HttpPost]
         public async void Post() // needs to be this way because algoritmik sends text/plain encoded by UTF8
         {
@@ -133,7 +135,21 @@ namespace InvHookTest.Controllers
             SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
             rec.InvoiceAssistantContent = JsonConvert.SerializeObject(rec);
 
-            BazureBufferAPI.SaveRecord(rec);
+            BazureBufferAPI.SaveBufferRecord(rec);
+        }
+
+
+        private static BazureInvoiceBufferAPI GetBazureInvoiceAPI(IConfiguration configuration)
+        {
+            SBAzureSettings config = new SBAzureSettings(
+                configuration.GetValue<string>("DatabaseConnection:Username"),
+                configuration.GetValue<string>("DatabaseConnection:Password"),
+                configuration.GetValue<string>("DatabaseConnection:ServerAddress"),
+                configuration.GetValue<string>("DatabaseConnection:InitialCatalog"),
+                configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"),
+                configuration.GetValue<string>("DatabaseConnection:TargetDatabase")
+            );
+            return new BazureInvoiceBufferAPI(config);
         }
         #endregion
     }

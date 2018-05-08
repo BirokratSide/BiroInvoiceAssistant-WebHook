@@ -27,7 +27,8 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
           "Newtonsoft.Json": "11.0.2",
-          "BiroInvoiceAssistantAPI": "1.0.0.0"
+          "BiroInvoiceAssistantAPI": "1.0.0.0",
+          "SharedUtilities": "1.0.0.0"
         },
         "runtime": {
           "InvHookTest.dll": {}
@@ -3995,6 +3996,14 @@
           "BiroInvoiceAssistantAPI.dll": {}
         }
       },
+      "SharedUtilities/1.0.0.0": {
+        "runtime": {
+          "SharedUtilities.dll": {}
+        },
+        "compile": {
+          "SharedUtilities.dll": {}
+        }
+      },
       "Microsoft.NETCore.App/2.0.0": {
         "dependencies": {
           "Microsoft.NETCore.DotNetHostPolicy": "2.0.0",
@@ -6280,6 +6289,11 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "BiroInvoiceAssistantAPI/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharedUtilities/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
