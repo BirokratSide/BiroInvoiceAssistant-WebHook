@@ -26,6 +26,7 @@ namespace InvHookTest.Controllers
     {
 
         private IConfiguration Configuration { get; set; }
+        private BiroInvoiceAssistantApi BiroInvApi;
         private InvoiceAssistantTestAPI InvoiceAssistantAPI;
         private BazureInvoiceBufferAPI BazureBufferAPI;
 
@@ -36,8 +37,15 @@ namespace InvHookTest.Controllers
 
             string ApiEndpoint = Configuration.GetValue<string>("InvoiceAssistantAPI:ENDPOINT");
             string ApiKey = Configuration.GetValue<string>("InvoiceAssistantAPI:APIKEY");
-            InvoiceAssistantAPI = new InvoiceAssistantTestAPI(ApiEndpoint, ApiKey);
-            BazureBufferAPI = GetBazureInvoiceAPI(configuration);
+            SBAzureSettings config = new SBAzureSettings(
+                configuration.GetValue<string>("DatabaseConnection:Username"),
+                configuration.GetValue<string>("DatabaseConnection:Password"),
+                configuration.GetValue<string>("DatabaseConnection:ServerAddress"),
+                configuration.GetValue<string>("DatabaseConnection:InitialCatalog"),
+                configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"),
+                configuration.GetValue<string>("DatabaseConnection:TargetDatabase")
+            );
+            BiroInvApi = new BiroInvoiceAssistantApi(ApiEndpoint, ApiKey, config);
         }
         #endregion
 
@@ -66,7 +74,7 @@ namespace InvHookTest.Controllers
         }
         #endregion
 
-        #region [Auxiliary]
+        #region [auxiliary]
         private static string VerifySubscription(string content)
         {
             dynamic RequestObject = JsonConvert.DeserializeObject(content);
@@ -77,6 +85,15 @@ namespace InvHookTest.Controllers
         }
 
         private void StoreInvoiceInBazureBuffer(string content)
+        {
+            string key = GetPollingKey(content);
+            SInvoiceAssistantReturn invoiceAssistantReturn = BiroInvApi.GetInvoiceAssistantReturn(key);
+            BiroInvApi.StoreProcessedInvoice(invoiceAssistantReturn);
+        }
+        #endregion
+
+        #region [auxiliary to auxiliary]
+        private string GetPollingKey(string content)
         {
             dynamic requestObject = JsonConvert.DeserializeObject(content);
             dynamic innerObject = null;
@@ -97,7 +114,8 @@ namespace InvHookTest.Controllers
             }
             catch (Exception ex) { }
 
-            if (innerObject == null) {
+            if (innerObject == null)
+            {
                 throw new Exception("Unable to parse the inner object from the content object" + content);
             }
 
@@ -105,7 +123,7 @@ namespace InvHookTest.Controllers
             {
                 // log that something has gone wrong and log the
                 // innerObject state as well.
-                return;
+                throw new Exception("InvoiceAssistant has not finished processing the polled invoice.");
             }
             string inv_key = "";
             Exception tmpException = null;
@@ -113,43 +131,22 @@ namespace InvHookTest.Controllers
             {
                 inv_key = innerObject.inv_key;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 tmpException = ex;
             }
             try
             {
                 inv_key = innerObject.inv_key.Value;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 tmpException = ex;
             }
 
             if (inv_key == "")
                 throw tmpException;
-
-
-
-            SParsedInvoice parsedInvoice = InvoiceAssistantAPI.PollForInvoice(inv_key, false, true).GetAwaiter().GetResult();
-
-            // store the record to the database
-            SInvoiceRecord rec = CInvoiceRecordToIdentifierMapper.ReverseMap(parsedInvoice.file_name);
-            rec.InvoiceAssistantContent = JsonConvert.SerializeObject(rec);
-
-            BazureBufferAPI.SaveBufferRecord(rec);
-        }
-
-
-        private static BazureInvoiceBufferAPI GetBazureInvoiceAPI(IConfiguration configuration)
-        {
-            SBAzureSettings config = new SBAzureSettings(
-                configuration.GetValue<string>("DatabaseConnection:Username"),
-                configuration.GetValue<string>("DatabaseConnection:Password"),
-                configuration.GetValue<string>("DatabaseConnection:ServerAddress"),
-                configuration.GetValue<string>("DatabaseConnection:InitialCatalog"),
-                configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"),
-                configuration.GetValue<string>("DatabaseConnection:TargetDatabase")
-            );
-            return new BazureInvoiceBufferAPI(config);
+            return inv_key;
         }
         #endregion
     }

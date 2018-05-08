@@ -22,6 +22,9 @@
     <Reference Include="BiroInvoiceAssistantAPI">
       <HintPath>..\..\..\external_deps\BiroInvoiceAssistantAPI.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\external_deps\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharedUtilities">
       <HintPath>..\..\..\external_deps\SharedUtilities.dll</HintPath>
     </Reference>
