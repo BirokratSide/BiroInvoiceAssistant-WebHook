@@ -12,12 +12,6 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using BiroInvoiceAssistant;
-using BiroInvoiceAssistant.structs;
-using BiroInvoiceAssistant.helpers;
-
-using SharedUtilities.utils;
-
 namespace InvHookTest.Controllers
 {
     [Produces("application/json")]
@@ -26,30 +20,44 @@ namespace InvHookTest.Controllers
     {
 
         private IConfiguration Configuration { get; set; }
-        private BiroInvoiceAssistantApi BiroInvApi;
-        private InvoiceAssistantTestAPI InvoiceAssistantAPI;
-        private BazureInvoiceBufferAPI BazureBufferAPI;
+        private HttpClient rihardClient = null;
+        private HttpClient biroInvAstClient = null;
+        string biroInvAstPath = "";
+
+        #region [Properties]
+        public HttpClient RihardClient {
+            get {
+                if (rihardClient == null)
+                    rihardClient = new HttpClient();
+                return rihardClient;
+            }
+        }
+
+        public HttpClient BiroInvAstClient {
+            get {
+                if (biroInvAstClient == null) {
+                    biroInvAstClient = new HttpClient();
+                    biroInvAstClient.BaseAddress = new Uri(Configuration.GetValue<string>("BiroInvoiceAssistantHost:Endpoint"));
+                }
+                return biroInvAstClient;
+            }
+        }
+        #endregion
 
         #region [Constructor]
         public InvoiceAssistantController(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            string ApiEndpoint = Configuration.GetValue<string>("InvoiceAssistantAPI:ENDPOINT");
-            string ApiKey = Configuration.GetValue<string>("InvoiceAssistantAPI:APIKEY");
-            SBAzureSettings config = new SBAzureSettings(
-                configuration.GetValue<string>("DatabaseConnection:Username"),
-                configuration.GetValue<string>("DatabaseConnection:Password"),
-                configuration.GetValue<string>("DatabaseConnection:ServerAddress"),
-                configuration.GetValue<string>("DatabaseConnection:InitialCatalog"),
-                configuration.GetValue<bool>("DatabaseConnection:IntegratedSecurity"),
-                configuration.GetValue<string>("DatabaseConnection:TargetDatabase")
-            );
-            BiroInvApi = new BiroInvoiceAssistantApi(ApiEndpoint, ApiKey, config);
         }
         #endregion
 
         #region [API]
+        [HttpGet]
+        [HttpGet("ping", Name = "Ping")]
+        public async Task<string> Ping() {
+            return "Pong!";
+        }
+
         [HttpPost]
         public async void Post() // needs to be this way because algoritmik sends text/plain encoded by UTF8
         {
@@ -75,20 +83,25 @@ namespace InvHookTest.Controllers
         #endregion
 
         #region [auxiliary]
-        private static string VerifySubscription(string content)
+        private string VerifySubscription(string content)
         {
             dynamic RequestObject = JsonConvert.DeserializeObject(content);
             string SubscribeURL = RequestObject.SubscribeURL;
-            HttpClient client = new HttpClient();
-            HttpResponseMessage msg = client.GetAsync(SubscribeURL).GetAwaiter().GetResult();
+
+            if (rihardClient == null)
+            {
+                rihardClient = new HttpClient();
+            }
+            HttpResponseMessage msg = rihardClient.GetAsync(SubscribeURL).GetAwaiter().GetResult();
             return msg.Content.ReadAsStringAsync().GetAwaiter().GetResult();
         }
 
-        private void StoreInvoiceInBazureBuffer(string content)
+        private async void StoreInvoiceInBazureBuffer(string content)
         {
             string key = GetPollingKey(content);
-            SInvoiceAssistantReturn invoiceAssistantReturn = BiroInvApi.GetInvoiceAssistantReturn(key);
-            BiroInvApi.StoreProcessedInvoice(invoiceAssistantReturn);
+
+            HttpResponseMessage msg = await BiroInvAstClient.GetAsync(string.Format("/api/invoice/process?inv_key={0}", key));
+            Console.WriteLine("Call completed: " + msg.Content.ReadAsStringAsync());
         }
         #endregion
 
