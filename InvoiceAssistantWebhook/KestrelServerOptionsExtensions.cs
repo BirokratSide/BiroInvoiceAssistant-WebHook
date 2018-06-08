@@ -84,7 +84,7 @@ namespace InvoiceAssistantWebhook
             }
 
             // WARNING!!!!! JUST FOR TESTING PURPOSES!!!!!
-            config.Password = "kurackurac123"; 
+            config.Password = "DzUgAsViL473lel"; 
             if (config.FilePath != null && config.Password != null)
             {
                 return new X509Certificate2(config.FilePath, config.Password);

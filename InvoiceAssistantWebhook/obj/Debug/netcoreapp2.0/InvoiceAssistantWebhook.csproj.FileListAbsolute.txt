@@ -20,3 +20,14 @@
 /Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/obj/Debug/netcoreapp2.0/InvoiceAssistantWebhook.AssemblyInfo.cs
 /Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/obj/Debug/netcoreapp2.0/InvoiceAssistantWebhook.dll
 /Users/km/Desktop/playground/birokrat/InvoiceAssistant/InvoiceAssistant-WebHook/InvoiceAssistantWebhook/obj/Debug/netcoreapp2.0/InvoiceAssistantWebhook.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.deps.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.runtimeconfig.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.runtimeconfig.dev.json
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csprojResolveAssemblyReference.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csproj.CoreCompileInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.AssemblyInfoInputs.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.AssemblyInfo.cs
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.pdb
