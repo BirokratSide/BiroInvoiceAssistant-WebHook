@@ -83,11 +83,9 @@ namespace InvoiceAssistantWebhook
                 }
             }
 
-            // WARNING!!!!! JUST FOR TESTING PURPOSES!!!!!
-            config.Password = "DzUgAsViL473lel"; 
-            if (config.FilePath != null && config.Password != null)
+            if (config.CertificateFilePath != null && config.CertificatePassword != null)
             {
-                return new X509Certificate2(config.FilePath, config.Password);
+                return new X509Certificate2(config.CertificateFilePath, config.CertificatePassword);
             }
 
             throw new InvalidOperationException("No valid certificate configuration found for the current endpoint.");

@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace InvoiceAssistantWebhook
 {
     public class EndpointConfiguration
@@ -8,7 +9,7 @@ namespace InvoiceAssistantWebhook
         public string Scheme { get; set; }
         public string StoreName { get; set; }
         public string StoreLocation { get; set; }
-        public string FilePath { get; set; }
-        public string Password { get; set; }
+        public string CertificateFilePath { get; set; }
+        public string CertificatePassword { get; set; }
     }
 }
