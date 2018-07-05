@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 
@@ -69,7 +70,18 @@ namespace InvoiceAssistantWebhook.Controllers
             string content = "";
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
-                content = await reader.ReadToEndAsync();
+                while (true)
+                {
+                    try
+                    {
+                        content = await reader.ReadToEndAsync();
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        Thread.Sleep(1000);
+                    }
+                }
             }
 
             string msgType = Request.Headers["x-amz-sns-message-type"];
