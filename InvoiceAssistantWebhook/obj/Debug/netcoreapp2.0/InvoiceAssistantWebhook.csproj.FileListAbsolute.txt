@@ -25,9 +25,9 @@ C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssist
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.runtimeconfig.dev.json
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.dll
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\InvoiceAssistantWebhook.pdb
-C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csprojResolveAssemblyReference.cache
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csproj.CoreCompileInputs.cache
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.AssemblyInfoInputs.cache
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.AssemblyInfo.cs
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.dll
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csprojAssemblyReference.cache
