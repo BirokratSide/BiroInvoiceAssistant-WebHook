@@ -83,6 +83,7 @@ namespace InvoiceAssistantWebhook.Controllers
                     }
                 }
             }
+            Console.WriteLine(content);
 
             string msgType = Request.Headers["x-amz-sns-message-type"];
             if (msgType != null && msgType == "SubscriptionConfirmation")
@@ -92,6 +93,7 @@ namespace InvoiceAssistantWebhook.Controllers
             }
             else
             {
+                Console.WriteLine("STORE INVOICE IN BAZURE BUFFER IS CALLED!");
                 StoreInvoiceInBazureBuffer(content);
             }
         }
@@ -114,7 +116,7 @@ namespace InvoiceAssistantWebhook.Controllers
         private async void StoreInvoiceInBazureBuffer(string content)
         {
             string key = GetPollingKey(content);
-
+            Console.WriteLine("THE KEY FOR POLLING IS: {0}", key);
             HttpResponseMessage msg = await BiroInvAstClient.GetAsync(string.Format("/api/invoice/process?inv_key={0}", key));
             Console.WriteLine("Call completed: " + msg.Content.ReadAsStringAsync());
         }
