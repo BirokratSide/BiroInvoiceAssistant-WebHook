@@ -74,11 +74,14 @@ namespace InvoiceAssistantWebhook.Controllers
                 {
                     try
                     {
+                        Console.WriteLine("ATTEMPT TO READ CONTENT");
                         content = await reader.ReadToEndAsync();
+                        Console.WriteLine("SUCCESSFUL");
                         break;
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("PROBLEM");
                         Thread.Sleep(1000);
                     }
                 }
