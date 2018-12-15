@@ -1,0 +1,1 @@
+[2018-12-15 14:33:50] (Exception) -> File 'appsettings.Secrets.Example.json' copied to 'appsettings.Secrets.json'. Verify settings and rerun. Press any key to exit.

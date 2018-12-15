@@ -31,3 +31,6 @@ C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssist
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.dll
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.pdb
 C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csprojAssemblyReference.cache
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\common.dll
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\bin\Debug\netcoreapp2.0\common.pdb
+C:\Users\Kristijan\Desktop\playground\BiroInvoiceAssistant-WebHook\InvoiceAssistantWebhook\obj\Debug\netcoreapp2.0\InvoiceAssistantWebhook.csproj.CopyComplete
