@@ -36,6 +36,9 @@ namespace InvoiceAssistantWebhook
         #region // config methods //
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMvc().AddControllersAsServices();
+
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new RequireHttpsAttribute());

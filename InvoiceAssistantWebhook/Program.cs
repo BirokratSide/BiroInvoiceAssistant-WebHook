@@ -38,6 +38,12 @@ namespace InvoiceAssistantWebhook
 
             return WebHost.CreateDefaultBuilder(args)
                    .UseStartup<Startup>()
+                   .UseConfiguration(configuration)
+                   .ConfigureLogging(builder =>
+                   {
+                       builder.ClearProviders();
+                       builder.AddSerilog();
+                   })
                    .UseKestrel(options => options.ConfigureEndpoints()) //TURN ON FOR HTTPS
                    .Build();
         }

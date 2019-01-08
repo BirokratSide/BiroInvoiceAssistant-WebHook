@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,7 +21,8 @@ namespace InvoiceAssistantWebhook.Controllers
         private IConfiguration Configuration { get; set; }
         private HttpClient rihardClient = null;
         private HttpClient biroInvAstClient = null;
-        string biroInvAstPath = "";
+
+        private ILogger<InvoiceAssistantController> Logger;
 
         #region [Properties]
         public HttpClient RihardClient
@@ -48,8 +50,9 @@ namespace InvoiceAssistantWebhook.Controllers
         #endregion
 
         #region [Constructor]
-        public InvoiceAssistantController(IConfiguration configuration)
+        public InvoiceAssistantController(IConfiguration configuration, ILogger<InvoiceAssistantController> logger)
         {
+            Logger = logger;
             Configuration = configuration;
         }
         #endregion
@@ -65,7 +68,7 @@ namespace InvoiceAssistantWebhook.Controllers
         [HttpPost]
         public async void Post() // needs to be this way because algoritmik sends text/plain encoded by UTF8
         {
-            Console.WriteLine("Incoming request");
+            Logger.LogInformation("Incoming request");
 
             string content = "";
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
@@ -74,29 +77,29 @@ namespace InvoiceAssistantWebhook.Controllers
                 {
                     try
                     {
-                        Console.WriteLine("ATTEMPT TO READ CONTENT");
+                        Logger.LogInformation("ATTEMPT TO READ CONTENT");
                         content = await reader.ReadToEndAsync();
-                        Console.WriteLine("SUCCESSFUL");
+                        Logger.LogInformation("SUCCESSFUL");
                         break;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("PROBLEM");
+                        Logger.LogInformation("PROBLEM");
                         Thread.Sleep(1000);
                     }
                 }
             }
-            Console.WriteLine(content);
+            Logger.LogInformation(content);
 
             string msgType = Request.Headers["x-amz-sns-message-type"];
             if (msgType != null && msgType == "SubscriptionConfirmation")
             {
                 string returnMessage = VerifySubscription(content);
-                Console.WriteLine("Registration finished: {0}", returnMessage);
+                Logger.LogInformation("Registration finished: {0}", returnMessage);
             }
             else
             {
-                Console.WriteLine("STORE INVOICE IN BAZURE BUFFER IS CALLED!");
+                Logger.LogInformation("STORE INVOICE IN BAZURE BUFFER IS CALLED!");
                 StoreInvoiceInBazureBuffer(content);
             }
         }
@@ -119,9 +122,9 @@ namespace InvoiceAssistantWebhook.Controllers
         private async void StoreInvoiceInBazureBuffer(string content)
         {
             string key = GetPollingKey(content);
-            Console.WriteLine("THE KEY FOR POLLING IS: {0}", key);
+            Logger.LogInformation("THE KEY FOR POLLING IS: {0}", key);
             HttpResponseMessage msg = await BiroInvAstClient.GetAsync(string.Format("/api/invoice/process?inv_key={0}", key));
-            Console.WriteLine("Call completed: " + msg.Content.ReadAsStringAsync());
+            Logger.LogInformation("Call completed: " + msg.Content.ReadAsStringAsync());
         }
         #endregion
 
