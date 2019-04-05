@@ -1,5 +1,7 @@
 ## BiroInvoiceAssistantWebhook
 
+THIS PROJECT WAS MOVED. NOW ALL PROJECTS THAT ARE DEPENDENCIES OF BIROINVOICEASSISTANT ARE IN ONE REPOSITORY. THIS IS KEPT TO PRESERVE THE GIT HISTORY OF THE TESTS PROJECT.
+
 BiroInvoiceAssistant web hook is the endpoint to which processed invoices from the InvoiceAssistant get posted via HTTPS.
 
 ### Configuration
